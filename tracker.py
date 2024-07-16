@@ -3,6 +3,7 @@ from habit import Habit
 
 class HabitTracker:
     """Class to manage habits, including creating, completing, and storing them."""
+    
     def __init__(self, filename='habits.json'):
         """
         Initialize the habit tracker.
