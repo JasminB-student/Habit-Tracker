@@ -20,7 +20,7 @@ A simple habit tracking application implemented in Python. This application allo
 
 First, clone the repository from GitHub:
 ```
-git clone https://github.com/yourusername/habit-tracker.git
+https://github.com/JasminB-student/Habit-Tracker.git
 cd habit-tracker
 ```
 
