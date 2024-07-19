@@ -1,65 +1,6 @@
 import json
 from habit import Habit
 
-predefined_habits_data = [
-    {
-        "name": "Brush Teeth",
-        "periodicity": "daily",
-        "completed_tasks": [
-            "2024-06-01T08:00:00",
-            "2024-06-02T08:00:00",
-            "2024-06-03T08:00:00",
-            "2024-06-04T08:00:00",
-            "2024-06-05T08:00:00",
-            "2024-06-06T08:00:00",
-            "2024-06-07T08:00:00"
-        ]
-    },
-    {
-        "name": "Workout",
-        "periodicity": "daily",
-        "completed_tasks": [
-            "2024-06-01T18:00:00",
-            "2024-06-02T18:00:00",
-            "2024-06-03T18:00:00",
-            "2024-06-05T18:00:00",
-            "2024-06-06T18:00:00",
-            "2024-06-08T18:00:00"
-        ]
-    },
-    {
-        "name": "Read Book",
-        "periodicity": "daily",
-        "completed_tasks": [
-            "2024-06-01T20:00:00",
-            "2024-06-03T20:00:00",
-            "2024-06-05T20:00:00",
-            "2024-06-07T20:00:00",
-            "2024-06-09T20:00:00"
-        ]
-    },
-    {
-        "name": "Grocery Shopping",
-        "periodicity": "weekly",
-        "completed_tasks": [
-            "2024-06-01T10:00:00",
-            "2024-06-08T10:00:00",
-            "2024-06-15T10:00:00",
-            "2024-06-22T10:00:00"
-        ]
-    },
-    {
-        "name": "Laundry",
-        "periodicity": "weekly",
-        "completed_tasks": [
-            "2024-06-03T10:00:00",
-            "2024-06-10T10:00:00",
-            "2024-06-17T10:00:00",
-            "2024-06-24T10:00:00"
-        ]
-    }
-]
-
 class HabitTracker:
     """Class to manage habits, including creating, completing, and storing them."""
     
@@ -71,14 +12,30 @@ class HabitTracker:
         """
         self.filename = filename
         self.habits = self.load_habits()
-        
-        # Add predefined habits if no habits file exists
         if not self.habits:
-            for habit_data in predefined_habits_data:
-                habit = Habit(habit_data["name"], habit_data["periodicity"])
-                habit.completed_tasks = [datetime.fromisoformat(task) for task in habit_data["completed_tasks"]]
-                self.habits[habit_data["name"]] = habit
-            self.save_habits()
+            self.add_predefined_habits()
+            
+   def add_predefined_habits(self):
+        """Add predefined habits to the tracker."""
+        predefined_habits = [
+            {"name": "Brush Teeth", "periodicity": "daily"},
+            {"name": "Workout", "periodicity": "daily"},
+            {"name": "Read Book", "periodicity": "daily"},
+            {"name": "Grocery Shopping", "periodicity": "weekly"},
+            {"name": "Laundry", "periodicity": "weekly"}
+        ]
+
+        # Add predefined habits with some example tracking data
+        for habit_data in predefined_habits:
+            habit = Habit(habit_data["name"], habit_data["periodicity"])
+            now = datetime.now()
+            if habit_data["periodicity"] == "daily":
+                habit.completed_tasks = [now - timedelta(days=i) for i in range(28)]
+            elif habit_data["periodicity"] == "weekly":
+                habit.completed_tasks = [now - timedelta(weeks=i) for i in range(4)]
+            self.habits[habit_data["name"]] = habit
+        
+        self.save_habits()
 
     def create_habit(self, name, periodicity):
         """

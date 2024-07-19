@@ -35,22 +35,23 @@ class TestHabitTracker(unittest.TestCase):
 
     def test_create_and_list_habits(self):
         """Test creating and listing habits."""
-        self.tracker.create_habit("Test Habit 1", "daily")
-        self.tracker.create_habit("Test Habit 2", "weekly")
-        self.assertEqual(len(self.tracker.list_habits()), 2)
+        self.assertEqual(len(self.tracker.list_habits()), 5)
 
     def test_complete_habit(self):
         """Test marking a habit as completed."""
-        self.tracker.create_habit("Test Habit", "daily")
-        self.tracker.complete_habit("Test Habit")
-        habit = self.tracker.habits["Test Habit"]
-        self.assertEqual(len(habit.completed_tasks), 1)
+        self.tracker.complete_habit("Brush Teeth")
+        habit = self.tracker.habits["Brush Teeth"]
+        self.assertEqual(len(habit.completed_tasks), 29) # 28 predefined + 1 new completion
 
     def test_longest_streak(self):
         """Test calculating the longest streak of all habits."""
-        self.tracker.create_habit("Test Habit", "daily")
-        self.tracker.complete_habit("Test Habit")
-        self.assertEqual(self.tracker.longest_streak(), 1)
+        self.assertEqual(self.tracker.longest_streak(), 28) # Daily habits have a streak of 28
+
+    def test_longest_streak_per_periodicity(self):
+        """Test calculating the longest streak for a given periodicity."""
+        self.assertEqual(self.tracker.longest_streak_per_periodicity("daily"), 28)
+        self.assertEqual(self.tracker.longest_streak_per_periodicity("weekly"), 4)
+
 
 if __name__ == '__main__':
     unittest.main()
