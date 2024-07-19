@@ -15,7 +15,8 @@ def main():
         4. list <periodicity> - List all habits with the specified periodicity (daily or weekly)
         5. streak - Show the longest run streak of all habits
         6. streak <habit_name> - Show the longest run streak for the specified habit
-        7. exit - Exit the program
+        7. streak_periodicity <periodicity> - Show the longest run streak for the specified periodicity
+        8. exit - Exit the program
         """)
 
     while True:
@@ -44,6 +45,9 @@ def main():
             elif len(command) == 2:
                 habit_name = command[1]
                 print(f"Longest streak for habit '{habit_name}':", tracker.longest_streak_for_habit(habit_name))
+        elif action == 'streak_periodicity' and len(command) == 2:
+            periodicity = command[1]
+            print(f"Longest streak for periodicity '{periodicity}':", tracker.longest_streak_per_periodicity(periodicity))
         elif action == 'exit':
             print("Exiting program.")
             break

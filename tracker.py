@@ -77,3 +77,12 @@ class HabitTracker:
         :return: Longest streak count for the specified habit
         """
         return self.habits[name].get_streak() if name in self.habits else 0
+
+    def longest_streak_per_periodicity(self, periodicity):
+        """
+        Return the longest streak of habits with the specified periodicity.
+        
+        :param periodicity: The periodicity to filter habits ('daily' or 'weekly')
+        :return: Longest streak count for the specified periodicity
+        """
+        return max((habit.get_streak() for habit in self.habits.values() if habit.periodicity == periodicity), default=0)
