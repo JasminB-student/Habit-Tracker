@@ -4,7 +4,7 @@ A simple habit tracking application implemented in Python. This application allo
 
 ## Features
 
-   -   Create and track daily and weekly habits
+   -  Create and track daily and weekly habits
    -  Mark habits as completed
    -  Track habit streaks
    -  List habits and analyze their performance
@@ -114,6 +114,18 @@ Example:
 streak "Brush Teeth"
 ```
 
+### Show the Longest Streak for Specified Periodicity
+
+To show the longest run streak for specified periodicity, use the `streak_periodicity` command followed by the periodicity: 
+```
+streak_periodicity <periodicity>
+```
+
+Example:
+```
+streak_periodicity "daily"
+```
+
 ### Exit the Application
 
 To exit the program, use the `exit` command: 
@@ -154,6 +166,21 @@ streak "Brush Teeth"
 exit
 ```
 
+## Predefined Habits
+
+The application comes with the following predefined habits:
+
+   - Brush Teeth (daily)
+   - Workout (daily)
+   - Read Book (daily)
+   - Grocery Shopping (weekly)
+   - Laundry (weekly)
+
+Each predefined habit includes some example tracking data:
+
+   - Daily habits have been completed for the last 28 days.
+   - Weekly habits have been completed for the last 4 weeks.
+ 
 ## Testing
 
 Unit tests are provided to ensure the validity of the habit tracking components. To run the tests, use the following command: 
